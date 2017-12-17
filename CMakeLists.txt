@@ -12,6 +12,8 @@ set_target_properties(ip_filter PROPERTIES
 	COMPILE_OPTION -Wpedantic -Wall -Wextra
 	)
 
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11")
+
 install(TARGETS ip_filter RUNTIME DESTINATION bin)
 
 set(CPACK_GENERATOR DEB)
