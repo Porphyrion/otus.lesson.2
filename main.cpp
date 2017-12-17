@@ -4,15 +4,7 @@
 #include <string>
 #include <vector>
 
-// ("",  '.') -> [""]
-// ("11", '.') -> ["11"]
-// ("..", '.') -> ["", "", ""]
-// ("11.", '.') -> ["11", ""]
-// (".11", '.') -> ["", "11"]
-// ("11.22", '.') -> ["11", "22"]
-
 using VectorString = std::vector<std::string>;
-
 
 VectorString split(const std::string &str, char d)
 {
@@ -55,7 +47,6 @@ int main(int argc, char const *argv[])
                         else if(std::stoi(x.at(i)) < std::stoi(y.at(i))) return false;
                     } return false;
                   }
-
             );
 
         for(std::vector<VectorString >::const_iterator ip = ip_pool.cbegin(); ip != ip_pool.cend(); ++ip)
