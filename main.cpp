@@ -39,7 +39,6 @@ int main(int argc, char const *argv[])
         }
 
         // TODO reverse lexicographically sort
-        //using t = decltype(*ip_pool.begin());
         std::sort(ip_pool.begin(), ip_pool.end(),
                   [](VectorString x, VectorString y)->bool
                   {
