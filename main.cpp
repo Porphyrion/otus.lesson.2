@@ -43,10 +43,7 @@ int main(int argc, char const *argv[])
         std::sort(ip_pool.begin(), ip_pool.end(),
                   [](decltype(*ip_pool.begin()) & x,decltype(*ip_pool.begin()) & y)->bool
                   {
-                    for(auto i = 0; i < 4; i++){
-                        if(std::stoi(x.at(i)) > std::stoi(y.at(i)))  return true;
-                        else if(std::stoi(x.at(i)) < std::stoi(y.at(i))) return false;
-                    } return false;
+                        return std::stoi(x.at(i)) < std::stoi(y.at(i));
                   }
             );
 
