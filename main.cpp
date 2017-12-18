@@ -41,7 +41,7 @@ int main(int argc, char const *argv[])
         // TODO reverse lexicographically sort
         //using t = decltype(*ip_pool.begin());
         std::sort(ip_pool.begin(), ip_pool.end(),
-                  [](std::vector<std::string> & x,std::vector<std::string> & y)->bool
+                  [](decltype(*ip_pool.begin()) & x,decltype(*ip_pool.begin()) & y)->bool
                   {
                     for(auto i = 0; i < 4; i++){
                         if(std::stoi(x.at(i)) > std::stoi(y.at(i)))  return true;
