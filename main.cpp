@@ -39,9 +39,9 @@ int main(int argc, char const *argv[])
         }
 
         // TODO reverse lexicographically sort
-        using t = decltype(*ip_pool.begin());
+        //using t = decltype(*ip_pool.begin());
         std::sort(ip_pool.begin(), ip_pool.end(),
-                  [](t const& x,t const& y)
+                  [](std::vector<std::string> & x,std::vector<std::string> & y)
                   {
                     for(auto i = 0; i < 4; i++){
                         if(std::stoi(x.at(i)) > std::stoi(y.at(i)))  return true;
@@ -65,21 +65,21 @@ int main(int argc, char const *argv[])
         }
 
         
-        std::for_each(ip_pool.begin(), ip_pool.end(), [](t const&  x){
+        std::for_each(ip_pool.begin(), ip_pool.end(), [](std::vector<std::string> const&  x){
             if(std::stoi(x.at(0)) == 1) {
                 std::cout<<x.at(0)<<"."<<x.at(1)<<"."<<x.at(2)<<"."<<x.at(3)<<std::endl;
             }
         });
 
 
-        std::for_each(ip_pool.begin(), ip_pool.end(), [](t const&  x){
+        std::for_each(ip_pool.begin(), ip_pool.end(), [](std::vector<std::string> const&  x){
             if(std::stoi(x.at(0)) == 46 && std::stoi(x.at(1)) == 70) {
                 std::cout<<x.at(0)<<"."<<x.at(1)<<"."<<x.at(2)<<"."<<x.at(3)<<std::endl;
             }
         });
 
 
-        std::for_each(ip_pool.begin(), ip_pool.end(), [](t const&  x){
+        std::for_each(ip_pool.begin(), ip_pool.end(), [](std::vector<std::string> const&  x){
             if(std::stoi(x.at(0)) == 46 || std::stoi(x.at(1)) == 46 || std::stoi(x.at(2)) == 46 || std::stoi(x.at(3)) == 46) {
                 std::cout<<x.at(0)<<"."<<x.at(1)<<"."<<x.at(2)<<"."<<x.at(3)<<std::endl;
             }
