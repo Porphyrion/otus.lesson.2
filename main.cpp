@@ -40,7 +40,7 @@ int main(int argc, char const *argv[])
 
         // TODO reverse lexicographically sort
         //using t = decltype(*ip_pool.begin());
-        std::sort(ip_pool.begin(), ip_pool.end(),
+        /*std::sort(ip_pool.begin(), ip_pool.end(),
                   [](std::vector<std::string> & x,std::vector<std::string> & y)
                   {
                     for(auto i = 0; i < 4; i++){
@@ -48,7 +48,7 @@ int main(int argc, char const *argv[])
                         else if(std::stoi(x.at(i)) < std::stoi(y.at(i))) return false;
                     } return false;
                   }
-            );
+            );*/
 
         for(std::vector<VectorString >::const_iterator ip = ip_pool.cbegin(); ip != ip_pool.cend(); ++ip)
         {
