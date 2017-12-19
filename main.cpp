@@ -5,11 +5,11 @@
 #include <vector>
 #include <algorithm>
 
-using VectorString = std::vector<std::string>;
+using ip = std::vector<std::string>;
 
-VectorString split(const std::string &str, char d)
+ip split(const std::string &str, char d)
 {
-    auto r = VectorString();
+    auto r = ip();
 
     std::string::size_type start = 0;
     std::string::size_type stop = str.find_first_of(d);
@@ -49,11 +49,11 @@ int main(int argc, char const *argv[])
                   }
             );
 
-        for(std::vector<VectorString >::const_iterator ip = ip_pool.cbegin(); ip != ip_pool.cend(); ++ip)
+        for(auto ip_ = ip_pool.cbegin(); ip != ip_pool.cend(); ++ip_)
         {
-            for(VectorString::const_iterator ip_part = ip->cbegin(); ip_part != ip->cend(); ++ip_part)
+            for(auto ip_part = ip_->cbegin(); ip_part != ip_->cend(); ++ip_part)
             {
-                if (ip_part != ip->cbegin())
+                if (ip_part != ip_->cbegin())
                 {
                     std::cout << ".";
 
