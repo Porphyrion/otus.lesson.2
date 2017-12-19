@@ -40,7 +40,7 @@ int main(int argc, char const *argv[])
 
         // TODO reverse lexicographically sort
         std::sort(ip_pool.begin(), ip_pool.end(),
-                  [](VectorString x, VectorString y)->bool
+                  [](ip x, ip y)->bool
                   {
                    for(auto i = 0; i < 4; i++){
                         if(std::stoi(x.at(i)) > std::stoi(y.at(i)))  return true;
