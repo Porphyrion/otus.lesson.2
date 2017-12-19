@@ -30,7 +30,7 @@ int main(int argc, char const *argv[])
 {
     try
     {
-        auto ip_pool= std::vector<VectorString>();
+        auto ip_pool= std::vector<ip>();
 
         for(std::string line; std::getline(std::cin, line);)
         {
@@ -56,7 +56,6 @@ int main(int argc, char const *argv[])
                 if (ip_part != ip_->cbegin())
                 {
                     std::cout << ".";
-
                 }
                 std::cout << *ip_part;
             }
