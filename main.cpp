@@ -7,6 +7,17 @@
 
 using ip = std::vector<std::string>;
 
+void writeIp(ip::const_iterator beginIp ,ip::const_iterator endIp){
+    for(auto ip_part = beginIp; ip_part!=endIp; ++ip_part){
+        if (ip_part != beginIp)
+        {
+            std::cout << ".";
+        }
+        std::cout << *ip_part;
+    }
+    std::cout << std::endl;
+}
+
 ip split(const std::string &str, char d)
 {
     auto r = ip();
@@ -34,7 +45,7 @@ int main(int argc, char const *argv[])
 
         for(std::string line; std::getline(std::cin, line);)
         {
-            VectorString v = split(line, '\t');
+            ip v = split(line, '\t');
             ip_pool.push_back(split(v.at(0), '.'));
         }
 
@@ -51,15 +62,7 @@ int main(int argc, char const *argv[])
 
         for(auto ip_ = ip_pool.cbegin(); ip_ != ip_pool.cend(); ++ip_)
         {
-            for(auto ip_part = ip_->cbegin(); ip_part != ip_->cend(); ++ip_part)
-            {
-                if (ip_part != ip_->cbegin())
-                {
-                    std::cout << ".";
-                }
-                std::cout << *ip_part;
-            }
-            std::cout << std::endl;
+            writeIp(ip_->cbegin(), ip_->cend());
         }
 
         
