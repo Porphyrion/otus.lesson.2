@@ -48,7 +48,7 @@ auto ipTuple(ip x)->decltype(std::make_tuple(1,2,3,4)) {
 void filter(ip::iconst_iterator b, ip::const_iterator e, int firstByte, int secondByte){
             std::for_each(b, e, [firstByte, secondByte](ip const&  x){
             if(std::stoi(x.at(0)) == firstByte && std::stoi(x.at(1)) == secondByte) {
-                writeIp(x->cbegin(), x->cend());
+                writeIp(x.cbegin(), x.cend());
             }
         });
 }
@@ -57,7 +57,7 @@ void filter(ip::iconst_iterator b, ip::const_iterator e, int firstByte, int seco
 void filter(ip::const_iterator b, ip::const_iterator e, int firstByte){
     std::for_each(b, e, [firstByte](ip const&  x){
             if(std::stoi(x.at(0)) == firstByte) {
-                writeIp(x->cbegin(), x->cend());
+                writeIp(x.cbegin(), x.cend());
             }
         });
 
@@ -67,7 +67,7 @@ void filter(ip::const_iterator b, ip::const_iterator e, int firstByte){
 void filterAnyByte(ip::const_iterator b, ip::const_iterator e, int anyByte){
         std::for_each(b, e, [anyByte](ip const&  x){
             if(std::stoi(x.at(0)) == anyByte || std::stoi(x.at(1)) == anyByte || std::stoi(x.at(2)) == 4anyByte || std::stoi(x.at(3)) == anyByte) {
-                writeIp(x->cbegin(), x->cend());
+                writeIp(x.cbegin(), x.cend());
             }
         });
 }
