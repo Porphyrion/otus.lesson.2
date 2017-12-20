@@ -45,7 +45,7 @@ auto ipTuple(ip x)->decltype(std::make_tuple(1,2,3,4)) {
 
 
 //filter by first and second bytes and output
-void filter(ip::iconst_iterator b, ip::const_iterator e, int firstByte, int secondByte){
+void filter(ip::const_iterator b, ip::const_iterator e, int firstByte, int secondByte){
             std::for_each(b, e, [firstByte, secondByte](ip const&  x){
             if(std::stoi(x.at(0)) == firstByte && std::stoi(x.at(1)) == secondByte) {
                 writeIp(x.cbegin(), x.cend());
@@ -86,7 +86,7 @@ int main(int argc, char const *argv[])
 
         // TODO reverse lexicographically sort
         std::sort(ip_pool.begin(), ip_pool.end(),
-                  [](ip x, ip y)->bool{return ipTuple(x)>ipTuple(y)};
+                  [](ip x, ip y)->bool{return ipTuple(x)>ipTuple(y);};
 
                     
         for(auto ip_ = ip_pool.cbegin(); ip_ != ip_pool.cend(); ++ip_)
