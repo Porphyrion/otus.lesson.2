@@ -7,7 +7,7 @@
 
 using ip = std::vector<std::string>;
 
-//функция для  записи ip
+
 void writeIp(ip::const_iterator beginIp ,ip::const_iterator endIp){
     for(auto ip_part = beginIp; ip_part!=endIp; ++ip_part){
         if (ip_part != beginIp)
@@ -53,7 +53,7 @@ void filter(std::vector<ip>::const_iterator b, std::vector<ip>::const_iterator e
         });
 }
 
-//TODO filter by first byte and output
+//filter by first byte and output
 void filter(std::vector<ip>::const_iterator b, std::vector<ip>::const_iterator e, int firstByte){
     std::for_each(b, e, [firstByte](ip const&  x){
             if(std::stoi(x.at(0)) == firstByte) {
@@ -84,7 +84,7 @@ int main(int argc, char const *argv[])
             ip_pool.push_back(split(v.at(0), '.'));
         }
 
-        // TODO reverse lexicographically sort
+        //lexicographically sort
         std::sort(ip_pool.begin(), ip_pool.end(),
                   [](ip x, ip y)->bool{return ipTuple(x)>ipTuple(y);});
 
