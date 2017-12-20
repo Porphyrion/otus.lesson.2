@@ -4,6 +4,7 @@
 #include <string>
 #include <vector>
 #include <algorithm>
+#include <tie>
 
 using ip = std::vector<std::string>;
 
@@ -37,6 +38,10 @@ ip split(const std::string &str, char d)
     return r;
 }
 
+auto ipTuple(ip x)->decltype(std::make_tuple(1,2,3,4)) {
+    return std::make_tuple(std::stoi(x.at(0)), std::stoi(x.at(1)), std::stoi(x.at(2)), std::stoi(x.at(3)));
+}
+
 int main(int argc, char const *argv[])
 {
     try
@@ -51,14 +56,7 @@ int main(int argc, char const *argv[])
 
         // TODO reverse lexicographically sort
         std::sort(ip_pool.begin(), ip_pool.end(),
-                  [](ip x, ip y)->bool
-                  {
-                   for(auto i = 0; i < 4; i++){
-                        if(std::stoi(x.at(i)) > std::stoi(y.at(i)))  return true;
-                        else if(std::stoi(x.at(i)) < std::stoi(y.at(i))) return false;
-                    } return false;
-                  }
-            );
+                  [](ip x, ip y)->bool{return ipTuple(x)>ipTuple(y)};
 
         for(auto ip_ = ip_pool.cbegin(); ip_ != ip_pool.cend(); ++ip_)
         {
@@ -68,21 +66,21 @@ int main(int argc, char const *argv[])
         
         std::for_each(ip_pool.begin(), ip_pool.end(), [](std::vector<std::string> const&  x){
             if(std::stoi(x.at(0)) == 1) {
-                std::cout<<x.at(0)<<"."<<x.at(1)<<"."<<x.at(2)<<"."<<x.at(3)<<std::endl;
+                writeIp(x->cbegin(), x->cend());
             }
         });
 
 
         std::for_each(ip_pool.begin(), ip_pool.end(), [](std::vector<std::string> const&  x){
             if(std::stoi(x.at(0)) == 46 && std::stoi(x.at(1)) == 70) {
-                std::cout<<x.at(0)<<"."<<x.at(1)<<"."<<x.at(2)<<"."<<x.at(3)<<std::endl;
+                writeIp(x->cbegin(), x->cend());
             }
         });
 
 
         std::for_each(ip_pool.begin(), ip_pool.end(), [](std::vector<std::string> const&  x){
             if(std::stoi(x.at(0)) == 46 || std::stoi(x.at(1)) == 46 || std::stoi(x.at(2)) == 46 || std::stoi(x.at(3)) == 46) {
-                std::cout<<x.at(0)<<"."<<x.at(1)<<"."<<x.at(2)<<"."<<x.at(3)<<std::endl;
+                writeIp(x->cbegin(), x->cend());
             }
         });
 
