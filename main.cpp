@@ -66,7 +66,7 @@ void filter(ip::const_iterator b, ip::const_iterator e, int firstByte){
 //filter by any byte and output
 void filterAnyByte(ip::const_iterator b, ip::const_iterator e, int anyByte){
         std::for_each(b, e, [anyByte](ip const&  x){
-            if(std::stoi(x.at(0)) == anyByte || std::stoi(x.at(1)) == anyByte || std::stoi(x.at(2)) == 4anyByte || std::stoi(x.at(3)) == anyByte) {
+            if(std::stoi(x.at(0)) == anyByte || std::stoi(x.at(1)) == anyByte || std::stoi(x.at(2)) == anyByte || std::stoi(x.at(3)) == anyByte) {
                 writeIp(x.cbegin(), x.cend());
             }
         });
@@ -86,7 +86,7 @@ int main(int argc, char const *argv[])
 
         // TODO reverse lexicographically sort
         std::sort(ip_pool.begin(), ip_pool.end(),
-                  [](ip x, ip y)->bool{return ipTuple(x)>ipTuple(y);};
+                  [](ip x, ip y)->bool{return ipTuple(x)>ipTuple(y);});
 
                     
         for(auto ip_ = ip_pool.cbegin(); ip_ != ip_pool.cend(); ++ip_)
