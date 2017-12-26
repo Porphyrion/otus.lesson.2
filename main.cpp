@@ -38,6 +38,11 @@ auto ipTuple(std::vector<std::string> && x)->decltype(std::make_tuple(1,2,3,4)) 
 template <typename... Args>
 void filter(std::vector<ip>::const_iterator b, std::vector<ip>::const_iterator e, Args ...args) {
     auto byteTuple = std::make_tuple((args)...); 
+    std::for_each(b, e, [byteTuple](ip x){
+        if(byteTuple == x)  {
+            writeIp(x);
+        }
+    });
 }
 
 //filter by any byte and output
