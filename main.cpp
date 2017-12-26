@@ -21,13 +21,12 @@ std::vector<std::string> split(const std::string &str, char d)
     while(stop != std::string::npos)
     {
         r.push_back(str.substr(start, stop - start));
-
+        
         start = stop + 1;
         stop = str.find_first_of(d, start);
     }
-
     r.push_back(str.substr(start));
-
+    
     return r;
 }
 //form std::vector<std::string> to  tuple
@@ -48,7 +47,6 @@ void filter(std::vector<ip>::const_iterator b, std::vector<ip>::const_iterator e
 
 //filter by any byte and output
 void filterAnyByte(std::vector<ip>::const_iterator b, std::vector<ip>::const_iterator e, int anyByte){
-
     std::for_each(b, e, [anyByte](ip x){
         if(std::get<0>(x) == anyByte || std::get<1>(x) == anyByte || std::get<2>(x) == anyByte || std::get<3>(x) == anyByte) {
             writeIp(x);
@@ -65,7 +63,7 @@ int main(int argc, char const *argv[])
         for(std::string line; std::getline(std::cin, line);)
         {
             std::vector<std::string> v = split(line, '\t');
-            ip_pool.push_back(ipTuple(split(v.at(0), '.'));
+            ip_pool.push_back(ipTuple(split(v.at(0), '.')));
         }
 
         // TODO reverse lexicographically sort
