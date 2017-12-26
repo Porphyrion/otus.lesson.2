@@ -35,9 +35,9 @@ auto ipTuple(std::vector<std::string> && x)->decltype(std::make_tuple(1,2,3,4)) 
 }
 
 //filter by first or first and second bytes and output
-template <class... Args>
+template <typename... Args>
 void filter(std::vector<ip>::const_iterator b, std::vector<ip>::const_iterator e, Args ...args) {
-    std::tuple<Args...> byteTuple(std::forward<Args>((args)...)); 
+    auto byteTuple = std::make_tuple<Args...>((args)...); 
 }
 
 //filter by any byte and output
