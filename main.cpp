@@ -37,20 +37,11 @@ auto ipTuple(std::vector<std::string> && x)->decltype(std::make_tuple(1,2,3,4)) 
 //filter by first or first and second bytes and output
 template <typename... Args>
 void filter(std::vector<ip>::const_iterator b, std::vector<ip>::const_iterator e, Args ...args) {
-    auto bytes = std::vector<int>((args)...);
-    if(sizeof...(args) == 1){
-    std::for_each(b, e, [byteTuple](ip x){
-        if(bytes.at(0) == std::get<0>(x))  {
-            writeIp(x);
-        }
-    });}
-    else if(sizeof...(args) == 2){
-            std::for_each(b, e, [byteTuple](ip x){
-        if(bytes.at(0) == std::get<0>(x) && ytes.at(1) == std::get<1>(x))  {
-            writeIp(x);
-        }
-    });
-    }
+template <class ... Args>
+void filter(std::vector<ip>::const_iterator b, std::vector<ip>::const_iterator e, Args ... args) {
+    auto x = std::make_tuple((args)...);
+    std::cout<<std::get<0>(x);
+
 }
 
 //filter by any byte and output
