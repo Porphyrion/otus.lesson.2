@@ -8,7 +8,7 @@
 using ip = decltype(std::make_tuple<int,int,int,int>(1,2,3,4));
 
 //функция для  записи ip
-void writeIp(std::vector<std::string> Ip){
+void writeIp(ip Ip){
     std::cout<<std::get<0>(Ip)<<"."<<std::get<1>(Ip)<<"."<<std::get<2>(Ip)<<"."<<std::get<3>(Ip)<<std::endl;
 }
 
@@ -31,7 +31,7 @@ std::vector<std::string> split(const std::string &str, char d)
     return r;
 }
 //form std::vector<std::string> to  tuple
-auto ipTuple(ip && x)->decltype(std::make_tuple(1,2,3,4)) {
+auto ipTuple(std::vector<std::string> && x)->decltype(std::make_tuple(1,2,3,4)) {
     return std::make_tuple(std::stoi(x.at(0)), std::stoi(x.at(1)), std::stoi(x.at(2)), std::stoi(x.at(3)));
 }
 
