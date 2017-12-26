@@ -7,16 +7,14 @@
 
 using ip = decltype(std::make_tuple<int,int,int,int>(1,2,3,4));
 
-using string_ip = std::vector<std::string>;
-
 //функция для  записи ip
 void writeIp(ip Ip){
     std::cout<<std::get<0>(Ip)<<"."<<std::get<1>(Ip)<<"."<<std::get<2>(Ip)<<"."<<std::get<3>(Ip)<<std::endl;
 }
 
-ip split(const std::string &str, char d)
+std::vector<std::string> split(const std::string &str, char d)
 {
-    auto r = ip();
+    auto r = std::vector<std::string>();
 
     std::string::size_type start = 0;
     std::string::size_type stop = str.find_first_of(d);
@@ -66,7 +64,7 @@ int main(int argc, char const *argv[])
 
         for(std::string line; std::getline(std::cin, line);)
         {
-            ip v = split(line, '\t');
+            std::vector<std::string> v = split(line, '\t');
             ip_pool.push_back(ipTuple(split(v.at(0), '.'));
         }
 
