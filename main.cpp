@@ -5,18 +5,13 @@
 #include <vector>
 #include <algorithm>
 
-using ip = std::vector<std::string>;
+using ip = decltype(std::make_tuple<int,int,int,int>(1,2,3,4));
 
+using string_ip = std::vector<std::string>;
 
-void writeIp(ip::const_iterator beginIp ,ip::const_iterator endIp){
-    for(auto ip_part = beginIp; ip_part!=endIp; ++ip_part){
-        if (ip_part != beginIp)
-        {
-            std::cout << ".";
-        }
-        std::cout << *ip_part;
-    }
-    std::cout << std::endl;
+//функция для  записи ip
+void writeIp(ip Ip){
+    std::cout<<std::get<0>(Ip)<<"."<<std::get<1>(Ip)<<"."<<std::get<2>(Ip)<<"."<<std::get<3>(Ip)<<std::endl;
 }
 
 ip split(const std::string &str, char d)
@@ -37,39 +32,30 @@ ip split(const std::string &str, char d)
 
     return r;
 }
-
-
-auto ipTuple(ip x)->decltype(std::make_tuple(1,2,3,4)) {
+//form std::vector<std::string> to  tuple
+auto ipTuple(ip && x)->decltype(std::make_tuple(1,2,3,4)) {
     return std::make_tuple(std::stoi(x.at(0)), std::stoi(x.at(1)), std::stoi(x.at(2)), std::stoi(x.at(3)));
 }
 
-
-//filter by first and second bytes and output
-void filter(std::vector<ip>::const_iterator b, std::vector<ip>::const_iterator e, int firstByte, int secondByte){
-            std::for_each(b, e, [firstByte, secondByte](ip const&  x){
-            if(std::stoi(x.at(0)) == firstByte && std::stoi(x.at(1)) == secondByte) {
-                writeIp(x.cbegin(), x.cend());
-            }
-        });
-}
-
-//filter by first byte and output
-void filter(std::vector<ip>::const_iterator b, std::vector<ip>::const_iterator e, int firstByte){
-    std::for_each(b, e, [firstByte](ip const&  x){
-            if(std::stoi(x.at(0)) == firstByte) {
-                writeIp(x.cbegin(), x.cend());
-            }
-        });
-
+//filter by first or first and second bytes and output
+template <typename... Args>
+void filter(std::vector<ip>::const_iterator b, std::vector<ip>::const_iterator e, Args ...args) {
+    auto byteTuple= std::make_tuple((args)...);
+    std::for_each(b, e, [byteTuple](ip x){
+        if(byteTuple == x)  {
+            writeIp(x);
+        }
+    });
 }
 
 //filter by any byte and output
 void filterAnyByte(std::vector<ip>::const_iterator b, std::vector<ip>::const_iterator e, int anyByte){
-        std::for_each(b, e, [anyByte](ip const&  x){
-            if(std::stoi(x.at(0)) == anyByte || std::stoi(x.at(1)) == anyByte || std::stoi(x.at(2)) == anyByte || std::stoi(x.at(3)) == anyByte) {
-                writeIp(x.cbegin(), x.cend());
-            }
-        });
+
+    std::for_each(b, e, [anyByte](ip x){
+        if(std::get<0>(x) == anyByte || std::get<1>(x) == anyByte || std::get<2>(x) == anyByte || std::get<3>(x) == anyByte) {
+            writeIp(x);
+        }
+    });
 }
 
 int main(int argc, char const *argv[])
@@ -81,25 +67,18 @@ int main(int argc, char const *argv[])
         for(std::string line; std::getline(std::cin, line);)
         {
             ip v = split(line, '\t');
-            ip_pool.push_back(split(v.at(0), '.'));
+            ip_pool.push_back(ipTuple(split(v.at(0), '.'));
         }
 
-        //lexicographically sort
+        // TODO reverse lexicographically sort
         std::sort(ip_pool.begin(), ip_pool.end(),
-                  [](ip x, ip y)->bool{return ipTuple(x)>ipTuple(y);});
-
-                    
-        for(auto ip_ = ip_pool.cbegin(); ip_ != ip_pool.cend(); ++ip_)
-        {
-            writeIp(ip_->cbegin(), ip_->cend());
-        }
-
-        
+                  [](ip x, ip y)->bool{return x>y;});
+                  
+        std::for_each(ip_pool.begin(), ip_pool.end(), [](ip x){writeIp(x);});
+       
         filter(ip_pool.cbegin(), ip_pool.cend(), 1);
         filter(ip_pool.cbegin(), ip_pool.cend(), 46, 70);
         filterAnyByte(ip_pool.cbegin(), ip_pool.cend(), 46);
-
-
         
     }
     catch(const std::exception &e)
