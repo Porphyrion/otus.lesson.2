@@ -86,11 +86,7 @@ int main(int argc, char const *argv[])
        
         filter(ip_pool.cbegin(), ip_pool.cend(), 1);
         filter(ip_pool.cbegin(), ip_pool.cend(), 46, 70);
-        filterAnyByte(ip_pool.cbegin(), ip_pool.cend(), 46);
-        auto x = std::make_tuple(1,2,4);
-        auto y = std::make_tuple(8,9);
-        std::cout<<(x>y);
-        
+        filterAnyByte(ip_pool.cbegin(), ip_pool.cend(), 46);        
     }
     catch(const std::exception &e)
     {
