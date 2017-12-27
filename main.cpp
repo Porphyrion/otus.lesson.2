@@ -37,8 +37,23 @@ auto ipTuple(std::vector<std::string> && x)->decltype(std::make_tuple(1,2,3,4)) 
 //filter by first or first and second bytes and output
 template <typename... Args>
 void filter(std::vector<ip>::const_iterator b, std::vector<ip>::const_iterator e, Args ... args) {
-    auto x = std::make_tuple((args)...);
-    auto y = std::get<0>(x);
+    if(sizeof...(args) == 1){
+        auto byteTuple = std::make_tuple((args)...,0,0,0);
+        std::for_each(b, e, [byteTuple](ip x){
+            if(std::get<0>(x) == std::get<0>(byteTuple)) {
+                writeIp(x);
+            }
+        });
+
+    }
+    else{
+        auto byteTuple = std::make_tuple((args)...,0,0);
+        std::for_each(b, e, [byteTuple](ip x){
+            if(std::get<0>(x) == std::get<0>(byteTuple) && std::get<1>(x) == std::get<1>(byteTuple)) {
+                writeIp(x);
+            }
+        });
+    }
 
 }
 
@@ -72,6 +87,9 @@ int main(int argc, char const *argv[])
         filter(ip_pool.cbegin(), ip_pool.cend(), 1);
         filter(ip_pool.cbegin(), ip_pool.cend(), 46, 70);
         filterAnyByte(ip_pool.cbegin(), ip_pool.cend(), 46);
+        auto x = std::make_tuple(1,2);
+        auto y = std::make_tuple(8,9);
+        std::cout<<(x>y);
         
     }
     catch(const std::exception &e)
