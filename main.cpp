@@ -9,7 +9,7 @@ using ip = std::vector<int>;
 using string_ip = std::vector<std::string>;
 
 //функция для  записи ip
-void writeIp(ip Ip){
+void writeIp(ip anyIp){
     for(auto i = anyIp.begin();i!=anyIp.end();i++ ){
         if(i!=anyIp.begin()){
             std::cout<<"."<<*i;
